@@ -53,14 +53,14 @@ public class CarritoTest {
     }
 
     @Test
-    public void testAgregarProductoNuevo (){
+    public void testAgregarProdNuevo (){
 
         carrito.agregarProducto( aguacate , 2 );
         assertEquals( 2 , carrito.obtenerCantidad( "aguacate" ) );
     }
 
     @Test
-    public void testAgregarProductosDiferentes (){
+    public void testAgregarProdDiferentes (){
 
         carrito.agregarProducto( mango , 2 );
         carrito.agregarProducto( yuca , 5 );
@@ -69,7 +69,7 @@ public class CarritoTest {
     }
 
     @Test
-    public void testAgregarProductoSinCantidad (){
+    public void testAgregarProdSinCantidad (){
 
         NullPointerException nullPointerException = assertThrows( NullPointerException.class , () -> {
             carrito.agregarProducto( mango , 0 );
@@ -88,19 +88,19 @@ public class CarritoTest {
     }
 
     @Test
-    public void testPrecioTotalCarritoSinProductos (){
+    public void testPTotalCarritoSinProductos (){
 
         assertEquals( 0.0 , carrito.obtenerPrecioTotal() );
     }
 
     @Test
-    public void testPrecioTotalCarritoCantMayorUno (){
+    public void testPTotalCarritoCantMayorUno (){
         carrito.agregarProducto( aguacate , 5 );
         assertEquals( 250.00 , carrito.obtenerPrecioTotal() );
     }
 
     @Test
-    public void testPrecioTotalCarritoMasProdMayUno (){
+    public void testPTotalCarritoMasProdMayUno (){
         carrito.agregarProducto( aguacate , 5 );
         carrito.agregarProducto( mango , 3 );
         assertEquals( 295.00 , carrito.obtenerPrecioTotal() );
@@ -110,11 +110,7 @@ public class CarritoTest {
     public void testObtenerCantidadProdSinExistencia (){
         assertEquals( -1 , carrito.obtenerCantidad( "aguacate" ) );
 
-
     }
-
-
-
 
 
 }
