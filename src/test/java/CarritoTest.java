@@ -1,6 +1,5 @@
 
 import org.junit.jupiter.api.*;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -77,19 +76,42 @@ public class CarritoTest {
         assertEquals( "No se puede agregar al carrito un producto cuya cantidad es 0 o menor" , nullPointerException.getMessage() );
 
     }
+    @Test
+    public void testAdicionarCantnegativaExistente (){
 
+        NullPointerException nullPointerException = assertThrows( NullPointerException.class , () -> {
+            carrito.agregarProducto( papa , 20 );
+            carrito.agregarProducto( papa , -5 );
+
+        } );
+        assertEquals( "No se puede agregar al carrito un producto cuya cantidad es menor a 0" , nullPointerException.getMessage() );
+
+    }
+    @Test
+    public void testAgregarProdCantNegativa (){
+
+        NullPointerException nullPointerException = assertThrows( NullPointerException.class , () -> {
+            carrito.agregarProducto( mango , -5 );
+        } );
+        assertEquals( "No se puede agregar al carrito un producto cuya cantidad es 0 o menor" , nullPointerException.getMessage() );
+
+    }
+
+    @Test
+    public void testObtenerCantidadProdNoExistente (){
+        assertEquals( -1 , carrito.obtenerCantidad( "aguacate" ) );
+
+    }
 
     @Test
     public void testProbarTotal (){
         carrito.agregarProducto( lechuga , 1 );
         carrito.agregarProducto( papa , 1 );
-
         assertEquals( 25 + 10 , (long) carrito.obtenerPrecioTotal() );
     }
 
     @Test
     public void testPTotalCarritoSinProductos (){
-
         assertEquals( 0.0 , carrito.obtenerPrecioTotal() );
     }
 
@@ -106,11 +128,7 @@ public class CarritoTest {
         assertEquals( 295.00 , carrito.obtenerPrecioTotal() );
     }
 
-    @Test
-    public void testObtenerCantidadProdSinExistencia (){
-        assertEquals( -1 , carrito.obtenerCantidad( "aguacate" ) );
 
-    }
 
 
 }

@@ -31,12 +31,13 @@ class Carrito implements ICarrito {
         Item i = this.obtenerItem( p.getNombre() );
 
         if(i != null){
-
+           if( cant < 0)
+                throw new NullPointerException( "No se puede agregar al carrito un producto cuya cantidad es menor a 0" );
             i.setCantidad( i.getCantidad() + cant );
 
         } else {
             if(cant == 0 || cant < 0)
-                throw new NullPointerException( "No se puede agregar al carrito un producto cuya cantidad es 0 o menor" );
+               throw new NullPointerException( "No se puede agregar al carrito un producto cuya cantidad es 0 o menor" );
             items.add( new Item( p , cant ) );
         }
     }
@@ -125,7 +126,6 @@ class Carrito implements ICarrito {
         Producto aguacate = new Producto( 50 , "aguacate" );
         carrito.agregarProducto( aguacate , 5 );
         carrito.obtenerPrecioTotal();
-
 
     }
 
